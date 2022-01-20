@@ -94,13 +94,10 @@ class MapViewController: UIViewController {
         
         direction.calculate { response, error in
             guard error == nil else {
-                //log error
-                //show error
                 print(error?.localizedDescription)
                 return
             }
 
-           // guard let polyline: MKPolyline = response?.routes.first?.polyline else { return }
             guard let routes: [MKRoute] = response?.routes else { return }
             
             var i = 0
@@ -110,14 +107,12 @@ class MapViewController: UIViewController {
                 self.polylines.append(route.polyline)
             }
             
-            //self.mapView.addOverlay(polyline, level: .aboveLabels)
-         
             self.mapView.addOverlays(self.polylines, level: .aboveLabels)
             
             let rect = self.polylines[self.index].boundingMapRect
             let region = MKCoordinateRegion(rect)
             self.mapView.setRegion(region, animated: true)
-            //Odev 1 navigate buttonlari ile diger route'lar gosterilmelidir.
+            
         }
     }
     
@@ -171,12 +166,6 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        /*
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = .blue.withAlphaComponent(0.7)
-        renderer.lineWidth = 7
-        return renderer
-        */
         
         let polyline = overlay as! MKPolyline
         let renderer = MKPolylineRenderer(polyline: polyline)
