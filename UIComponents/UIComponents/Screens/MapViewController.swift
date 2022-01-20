@@ -11,7 +11,13 @@ import MapKit
 class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-
+    var index = 0 {
+        didSet{
+            mapView.setNeedsDisplay()
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,8 +63,17 @@ class MapViewController: UIViewController {
     @IBAction func showCurrentLocationTapped(_ sender: UIButton) {
         locationManager.requestLocation()
     }
+    
+    //MARK: Reset routes for another pin
+    func resetRoutes(){
+        mapView.removeOverlays(mapView.overlays)
+        
+    }
 
+    
+    //MARK: Drawing root
     @IBAction func drawRouteButtonTapped(_ sender: UIButton) {
+        resetRoutes()
         guard let currentCoordinate = currentCoordinate,
               let destinationCoordinate = destinationCoordinate else {
                   // log
@@ -79,7 +94,7 @@ class MapViewController: UIViewController {
         directionRequest.requestsAlternateRoutes = true
 
         let direction = MKDirections(request: directionRequest)
-
+        
         direction.calculate { response, error in
             guard error == nil else {
                 //log error
@@ -88,17 +103,48 @@ class MapViewController: UIViewController {
                 return
             }
 
-            guard let polyline: MKPolyline = response?.routes.first?.polyline else { return }
-            self.mapView.addOverlay(polyline, level: .aboveLabels)
-
-            let rect = polyline.boundingMapRect
+           // guard let polyline: MKPolyline = response?.routes.first?.polyline else { return }
+            guard let routes: [MKRoute] = response?.routes else { return }
+            var polylines = [MKPolyline]()
+            var i = 0
+            for route in routes{
+                route.polyline.title = "\(i)"
+                i += 1
+                polylines.append(route.polyline)
+            }
+            
+            //self.mapView.addOverlay(polyline, level: .aboveLabels)
+         
+            self.mapView.addOverlays(polylines, level: .aboveLabels)
+            
+            let rect = polylines[self.index].boundingMapRect
             let region = MKCoordinateRegion(rect)
             self.mapView.setRegion(region, animated: true)
-
             //Odev 1 navigate buttonlari ile diger route'lar gosterilmelidir.
         }
     }
-
+    
+    @IBAction func switchButtonTapped(_ sender: UIBarButtonItem) {
+        print(index)
+        switch sender.tag{
+        case 1:
+            if index >= 0 && index < 2{
+                index += 1
+            } else if index == 2{
+                index = 0
+            }
+        case 2:
+            if index == 0{
+                index = 2
+            } else if index > 0 && index <= 2{
+                index -= 1
+            }
+        default:
+            return
+        }
+        
+    }
+    
     private lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -112,7 +158,6 @@ extension MapViewController: CLLocationManagerDelegate {
         currentCoordinate = coordinate
         print("latitude: \(coordinate.latitude)")
         print("longitude: \(coordinate.longitude)")
-
         mapView.setCenter(coordinate, animated: true)
     }
 
@@ -127,9 +172,23 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        /*
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = .magenta
-        renderer.lineWidth = 8
+        renderer.strokeColor = .blue.withAlphaComponent(0.7)
+        renderer.lineWidth = 7
         return renderer
-    }
+        */
+        
+        let polyline = overlay as! MKPolyline
+        let renderer = MKPolylineRenderer(polyline: polyline)
+        print(polyline.title)
+        
+        if polyline.title == "\(index)"{
+            renderer.strokeColor = UIColor.blue
+        }else{
+            renderer.strokeColor = UIColor.darkGray
+            }
+        return renderer
+        }
+    
 }

@@ -101,10 +101,10 @@
                                 <rect key="frame" x="7" y="531" width="414" height="164"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="-63118800">
-                                    <!--1999-01-01 11:00:00 +0000-->
+                                    <!--1999-01-01 11:00:00 AM +0000-->
                                 </date>
                                 <date key="maximumDate" timeIntervalSinceReferenceDate="694177200">
-                                    <!--2022-12-31 11:00:00 +0000-->
+                                    <!--2022-12-31 11:00:00 AM +0000-->
                                 </date>
                                 <connections>
                                     <action selector="datePıckerValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="qnB-QL-9OA"/>
@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4644.927536231884" y="121.875"/>
+            <point key="canvasLocation" x="5078" y="-875"/>
         </scene>
         <!--Second View Controller-->
         <scene sceneID="rL7-tD-aVg">
@@ -317,7 +317,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rve-yA-xcd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3830.434782608696" y="121.875"/>
+            <point key="canvasLocation" x="4049" y="-875"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="sVR-mb-KYg">
@@ -333,34 +333,55 @@
                                     <outlet property="delegate" destination="m2C-yw-bgz" id="rBe-2a-h6x"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffX-8M-m1I">
-                                <rect key="frame" x="16" y="819" width="45" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="location" catalog="system"/>
-                                <connections>
-                                    <action selector="showCurrentLocationTapped:" destination="m2C-yw-bgz" eventType="touchUpInside" id="Hq1-LS-Qtn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVB-6K-5e7">
-                                <rect key="frame" x="303" y="819" width="95" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Draw route"/>
-                                <connections>
-                                    <action selector="drawRouteButtonTapped:" destination="m2C-yw-bgz" eventType="touchUpInside" id="dxT-ra-PEs"/>
-                                </connections>
-                            </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxI-Yg-XEA">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" id="xYB-pt-B4Y">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ffX-8M-m1I">
+                                            <rect key="frame" x="20" y="5" width="62" height="34"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="location" catalog="system"/>
+                                            <connections>
+                                                <action selector="showCurrentLocationTapped:" destination="m2C-yw-bgz" eventType="touchUpInside" id="Hq1-LS-Qtn"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="HwT-6r-2fK"/>
+                                    <barButtonItem tag="2" title="Item" image="chevron.left" catalog="system" id="y0n-Fi-LCg">
+                                        <connections>
+                                            <action selector="switchButtonTapped:" destination="m2C-yw-bgz" id="2SE-d9-Sq1"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="AXS-pQ-Hrt"/>
+                                    <barButtonItem tag="2" title="Item" image="chevron.right" catalog="system" id="jbw-rB-62e">
+                                        <connections>
+                                            <action selector="switchButtonTapped:" destination="m2C-yw-bgz" id="wgo-9J-AZz"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rib-Kt-T4T"/>
+                                    <barButtonItem style="plain" id="Hx3-nR-nyI">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="OVB-6K-5e7">
+                                            <rect key="frame" x="286" y="5" width="108" height="34.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Draw route"/>
+                                            <connections>
+                                                <action selector="drawRouteButtonTapped:" destination="m2C-yw-bgz" eventType="touchUpInside" id="dxT-ra-PEs"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cKL-Sn-6Te"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cKL-Sn-6Te" firstAttribute="bottom" secondItem="OVB-6K-5e7" secondAttribute="bottom" constant="12" id="4Zc-PA-YdP"/>
                             <constraint firstItem="gwP-Ey-78A" firstAttribute="top" secondItem="cKL-Sn-6Te" secondAttribute="top" id="S1H-HN-TNN"/>
                             <constraint firstItem="cKL-Sn-6Te" firstAttribute="bottom" secondItem="gwP-Ey-78A" secondAttribute="bottom" id="X4e-wV-bea"/>
                             <constraint firstItem="cKL-Sn-6Te" firstAttribute="trailing" secondItem="gwP-Ey-78A" secondAttribute="trailing" id="dOP-hM-XIz"/>
-                            <constraint firstItem="cKL-Sn-6Te" firstAttribute="trailing" secondItem="OVB-6K-5e7" secondAttribute="trailing" constant="16" id="lDs-Pt-ZMr"/>
                             <constraint firstItem="gwP-Ey-78A" firstAttribute="leading" secondItem="cKL-Sn-6Te" secondAttribute="leading" id="nta-0z-NAT"/>
-                            <constraint firstItem="ffX-8M-m1I" firstAttribute="leading" secondItem="cKL-Sn-6Te" secondAttribute="leading" constant="16" id="y8J-QK-62p"/>
-                            <constraint firstItem="cKL-Sn-6Te" firstAttribute="bottom" secondItem="ffX-8M-m1I" secondAttribute="bottom" constant="12" id="zVa-0s-bRv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AAX-mw-rl1"/>
@@ -370,7 +391,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGL-gP-UiA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="335" y="900"/>
+            <point key="canvasLocation" x="2975" y="1896"/>
         </scene>
         <!--Tabb Bar View Controller-->
         <scene sceneID="NeK-yN-FQh">
@@ -385,7 +406,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E2E-tS-oY7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1196" y="915"/>
+            <point key="canvasLocation" x="1151" y="1896"/>
         </scene>
         <!--Dynamic Collection View Controller-->
         <scene sceneID="KAr-ZD-e4Z">
@@ -452,7 +473,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcS-YZ-CEI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1998" y="892"/>
+            <point key="canvasLocation" x="-596" y="1896"/>
         </scene>
         <!--Dynamic Table View Controller-->
         <scene sceneID="OwQ-Or-Ise">
@@ -519,7 +540,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zbb-3d-Rd5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2748" y="892"/>
+            <point key="canvasLocation" x="-1474" y="1896"/>
         </scene>
         <!--Web View Container View Controller-->
         <scene sceneID="dZx-Jd-GVt">
@@ -573,7 +594,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1bd-lR-N2b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3767" y="892"/>
+            <point key="canvasLocation" x="2029" y="1896"/>
         </scene>
         <!--Static Table View Controller-->
         <scene sceneID="k1m-61-Abu">
@@ -746,6 +767,26 @@
                                             <segue destination="fIc-ZB-PBY" kind="show" id="jAN-hg-shG"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="35q-ql-UhZ" style="IBUITableViewCellStyleDefault" id="MBD-gp-p3L">
+                                        <rect key="frame" x="0.0" y="392.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MBD-gp-p3L" id="8Z9-UR-fon">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="HomeWorkVC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="35q-ql-UhZ">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="1CW-2X-ubj" kind="show" id="A8k-I1-5Cg"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -760,6 +801,49 @@
             </objects>
             <point key="canvasLocation" x="1955.072463768116" y="220.98214285714286"/>
         </scene>
+        <!--HomeWorkVC-->
+        <scene sceneID="Txz-ac-01I">
+            <objects>
+                <viewController storyboardIdentifier="HomeWorkVC" title="HomeWorkVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1CW-2X-ubj" customClass="HomeWorkVC" customModule="UIComponents" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ROe-ae-XLf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="hX5-0L-lar">
+                                <rect key="frame" x="126" y="836" width="162" height="26"/>
+                                <color key="tintColor" red="0.55094402600000003" green="1" blue="0.82835989119999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="pageIndicatorTintColor" systemColor="systemPurpleColor"/>
+                                <color key="currentPageIndicatorTintColor" systemColor="systemRedColor"/>
+                            </pageControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfQ-ev-JJl">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="PLx-5k-RzZ"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="jSr-3H-meW"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="67D-hz-IhH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="67D-hz-IhH" firstAttribute="bottom" secondItem="hX5-0L-lar" secondAttribute="bottom" id="4qT-sh-BOb"/>
+                            <constraint firstItem="67D-hz-IhH" firstAttribute="trailing" secondItem="hX5-0L-lar" secondAttribute="trailing" constant="126" id="5Cf-tI-MIK"/>
+                            <constraint firstItem="nfQ-ev-JJl" firstAttribute="trailing" secondItem="67D-hz-IhH" secondAttribute="trailing" id="EiU-sQ-4jA"/>
+                            <constraint firstItem="nfQ-ev-JJl" firstAttribute="top" secondItem="67D-hz-IhH" secondAttribute="top" id="dXD-0Q-KQK"/>
+                            <constraint firstItem="nfQ-ev-JJl" firstAttribute="leading" secondItem="67D-hz-IhH" secondAttribute="leading" id="ee1-6i-TjH"/>
+                            <constraint firstItem="nfQ-ev-JJl" firstAttribute="top" secondItem="67D-hz-IhH" secondAttribute="top" id="fbp-jA-NwJ"/>
+                            <constraint firstItem="nfQ-ev-JJl" firstAttribute="bottom" secondItem="67D-hz-IhH" secondAttribute="bottom" id="tUg-gk-xUR"/>
+                            <constraint firstItem="hX5-0L-lar" firstAttribute="leading" secondItem="67D-hz-IhH" secondAttribute="leading" constant="126" id="zes-Cy-Kk8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="H3f-Fy-fGA"/>
+                    <connections>
+                        <outlet property="pageController" destination="hX5-0L-lar" id="H3v-EY-IVv"/>
+                        <outlet property="scrollView" destination="nfQ-ev-JJl" id="m7w-X3-fkN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N0x-ED-xNs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4005.7971014492755" y="362.94642857142856"/>
+        </scene>
         <!--Page View Controller-->
         <scene sceneID="kKb-qi-l92">
             <objects>
@@ -768,7 +852,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jhc-35-pDf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1997" y="-481"/>
+            <point key="canvasLocation" x="3891" y="1896"/>
         </scene>
         <!--Compostitional Collection View Controller-->
         <scene sceneID="Mo6-VR-Suy">
@@ -819,7 +903,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lvQ-xn-FTz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2822" y="-105"/>
+            <point key="canvasLocation" x="262" y="1896"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JuM-1L-uAt">
@@ -846,6 +930,8 @@
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="bgImage" width="640" height="360"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="location" catalog="system" width="128" height="118"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -861,6 +947,9 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
