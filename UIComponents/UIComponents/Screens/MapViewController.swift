@@ -11,12 +11,7 @@ import MapKit
 class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-    var index = 0 {
-        didSet{
-            mapView.setNeedsDisplay()
-            
-        }
-    }
+    var index = 0 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +22,9 @@ class MapViewController: UIViewController {
 
     private var currentCoordinate: CLLocationCoordinate2D?
     private var destinationCoordinate: CLLocationCoordinate2D?
-
+    
+    var polylines = [MKPolyline]()
+    
     func addLongGestureRecognizer() {
         let longPressGesture = UILongPressGestureRecognizer(target: self,
                                                             action: #selector(handleLongPressGesture(_ :)))
@@ -105,19 +102,19 @@ class MapViewController: UIViewController {
 
            // guard let polyline: MKPolyline = response?.routes.first?.polyline else { return }
             guard let routes: [MKRoute] = response?.routes else { return }
-            var polylines = [MKPolyline]()
+            
             var i = 0
             for route in routes{
                 route.polyline.title = "\(i)"
                 i += 1
-                polylines.append(route.polyline)
+                self.polylines.append(route.polyline)
             }
             
             //self.mapView.addOverlay(polyline, level: .aboveLabels)
          
-            self.mapView.addOverlays(polylines, level: .aboveLabels)
+            self.mapView.addOverlays(self.polylines, level: .aboveLabels)
             
-            let rect = polylines[self.index].boundingMapRect
+            let rect = self.polylines[self.index].boundingMapRect
             let region = MKCoordinateRegion(rect)
             self.mapView.setRegion(region, animated: true)
             //Odev 1 navigate buttonlari ile diger route'lar gosterilmelidir.
@@ -133,12 +130,14 @@ class MapViewController: UIViewController {
             } else if index == 2{
                 index = 0
             }
+            self.mapView.addOverlays(self.polylines, level: .aboveLabels)
         case 2:
             if index == 0{
                 index = 2
             } else if index > 0 && index <= 2{
                 index -= 1
             }
+            self.mapView.addOverlays(self.polylines, level: .aboveLabels)
         default:
             return
         }
@@ -182,7 +181,6 @@ extension MapViewController: MKMapViewDelegate {
         let polyline = overlay as! MKPolyline
         let renderer = MKPolylineRenderer(polyline: polyline)
         print(polyline.title)
-        
         if polyline.title == "\(index)"{
             renderer.strokeColor = UIColor.blue
         }else{

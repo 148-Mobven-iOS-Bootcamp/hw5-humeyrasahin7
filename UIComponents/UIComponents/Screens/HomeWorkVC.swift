@@ -31,7 +31,7 @@ class HomeWorkVC: UIViewController {
         }
         
         scrollView.contentSize = CGSize(width: contentWidth, height: view.frame.height)
-        Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(imageChange), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(imageChange), userInfo: nil, repeats: true)
                 
     }
     
